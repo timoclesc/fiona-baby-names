@@ -30,7 +30,6 @@ function App() {
       if(state.name) {
         axios.post(url, state)
         .then(response => {
-          console.log(response);
           setState({
             ...state,
             isLoading: false,
@@ -49,7 +48,6 @@ function App() {
       id: new Date().getTime(),
       [e.currentTarget.name]: e.currentTarget.value
     });
-    console.log(state);
   }
 
   return (
