@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import BabyYoda from './baby-yoda';
 import './App.css';
 import axios from 'axios';
