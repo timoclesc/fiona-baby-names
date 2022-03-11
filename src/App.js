@@ -62,8 +62,6 @@ function App() {
       return;
     }
 
-    console.log(user);
-
     setState({
       ...state,
       isLoading: true,
@@ -72,7 +70,6 @@ function App() {
 
     axios.get(`${url}/submitter/${user}`)
       .then(response => {
-        console.log(response);
         setState({
           ...state,
           isLoading: false,

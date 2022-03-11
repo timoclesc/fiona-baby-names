@@ -117,6 +117,10 @@ button[disabled] {
   padding: 3px 10px;
 }
 
+#root { 
+  width: 100%;
+}
+
 /* prefixed by https://autoprefixer.github.io (PostCSS: v7.0.23, autoprefixer: v9.7.3) */
 /* author: https://dev.to/epkeaton */
 
@@ -133,6 +137,7 @@ body {
   justify-content: center;
   width: 100vw;
   font-size: 18px;
+  padding: 15px;
 }
 @-webkit-keyframes blink {
   0% {
