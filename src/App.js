@@ -1,7 +1,7 @@
 import BabyYoda from './baby-yoda';
 import './App.css';
 import axios from 'axios';
-import { useState} from 'react';
+import { useState, useRef} from 'react';
 
 const url = 'https://sheet.best/api/sheets/b0f0eada-bf2e-40bf-ae70-eaf10af373ec';
 
@@ -13,9 +13,17 @@ function App() {
       submitter: '',
       isLoading: false,
       hasError: false,
-      hasConfirm: false
+      hasConfirm: false,
+      loggedIn: false,
+      user: '',
+      data: []
     }
   );
+
+  const password = useRef();
+
+  const kimPassword = "1F884A";
+  const shazPassword = "D10DC0";
 
   const handleSubmit = function(e) {
     setState({
@@ -37,6 +45,41 @@ function App() {
           });
         })
       }
+  }
+
+  const handleLogin = (e) => {
+    var user = '';
+
+    if (password.current?.value === kimPassword ) {
+      user = 'Kim';
+    } else if (password.current?.value === shazPassword ) {
+      user = 'Shaz';
+    } else {
+      setState({
+        ...state,
+        hasError: true,
+      });
+      return;
+    }
+
+    console.log(user);
+
+    setState({
+      ...state,
+      isLoading: true,
+      loggedIn: user
+    });
+
+    axios.get(`${url}/submitter/${user}`)
+      .then(response => {
+        console.log(response);
+        setState({
+          ...state,
+          isLoading: false,
+          hasError: response.status !== 200,
+          data: response.data
+        });
+    })
   }
 
   var rainbowClassnames = `rainbow-container ${state.isLoading ? 'is-loading' : ''}`;
@@ -71,6 +114,7 @@ function App() {
         <button type="submit" disabled={!state.name || state.isLoading }>Save this name</button>
       </form>
 
+
       <div className="notification">
         {state.hasError ? <p>Uh-oh, something went wrong...</p> : ''}
         {state.hasConfirm ? <p>Success!</p> : ''}
@@ -79,6 +123,18 @@ function App() {
       <div className={rainbowClassnames}>
         <div className="rainbow"></div>
       </div>
+            
+      <hr />
+
+      <div className="login-container">
+        <label htmlFor="password">See my names</label>
+        <input id="password" type="password" ref={password} placeholder="password"></input>
+        <button onClick={handleLogin}> Show my names</button>
+      </div>
+      <div className="name-container">
+        {state.data.map( item => <p key={item.id}>{item.name}</p>)}
+      </div>
+
     </div>
   );
 }
