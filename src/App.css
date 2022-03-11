@@ -3,7 +3,6 @@
 }
 .App {
   text-align: center;
-  max-width: 400px;
 }
 
 .App-logo {
@@ -119,6 +118,7 @@ button[disabled] {
 
 #root { 
   width: 100%;
+  max-width: 400px;
 }
 
 /* prefixed by https://autoprefixer.github.io (PostCSS: v7.0.23, autoprefixer: v9.7.3) */
