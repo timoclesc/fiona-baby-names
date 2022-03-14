@@ -164,7 +164,9 @@ function App() {
             console.error(response);
           }
         })
-    )).then(
+    ))
+    
+    promises.then(
       () => {
         setState({
           ...state,
@@ -174,6 +176,8 @@ function App() {
         });
       }
     );
+
+
   }
 
   var containerClasses = `baby-container ${state.isLoading ? 'is-loading' : ''}`;
