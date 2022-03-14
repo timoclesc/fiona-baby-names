@@ -116,6 +116,32 @@ button[disabled] {
   padding: 3px 10px;
 }
 
+.name { 
+  font-size: 40px;
+}
+
+.rating-container {
+  margin-bottom: 30px;
+}
+
+.rating-selector {
+  padding: 20px 30px;
+  font-size: 20px;
+}
+
+.toggle-container button { 
+  background: lightgrey;
+  border-radius: 8px 8px 0 0;
+  width: 50%;
+}
+
+.prev-button, .next-button { 
+  background: none;
+  color: #176087;
+}
+.toggle-container .current-toggle {
+  background: #176087;
+}
 #root { 
   width: 100%;
   max-width: 400px;
@@ -467,6 +493,9 @@ body {
     opacity:0;
   }
 }
+.is-loading #y-body {
+  visibility: hidden;
+}
 #y-body {
   height: 100px;
   width: 90px;
@@ -776,14 +805,7 @@ body {
   * @author jh3y
 */
 
-.rainbow-container {
-  position: relative;
-  margin-top: 5px;
-  height: 50px;
-  visibility: hidden;
-}
-
-.rainbow-container.is-loading {
+.is-loading .rainbow {
   visibility: visible;
 }
 .rainbow {
@@ -802,7 +824,7 @@ body {
   height: 100px;
   position: absolute;
   width: 100px;
-  top: 50%;
+  top: 15%;
   left: 50%;
   -webkit-transform: translate(-50%, -25%);
           transform: translate(-50%, -25%); }
