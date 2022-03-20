@@ -11,6 +11,7 @@ const ratings = [
 
 function RateNames ({currentName, handleRating, changeId, saveNames}) {
     return (
+        currentName ?
         <>
           <h2>What if I were named...</h2>
           <p className='name'>{currentName.name}</p>
@@ -22,6 +23,10 @@ function RateNames ({currentName, handleRating, changeId, saveNames}) {
             <button className='next-button' onClick={()=> changeId(1)}>Next</button>
           </div>
           <button onClick={saveNames}>Save</button>
+        </>
+        :
+        <>
+          <p style={{"textStyle": "italics"}}>Looks like there's nothing here...</p>
         </>
     )
 }

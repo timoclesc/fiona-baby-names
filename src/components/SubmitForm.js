@@ -1,14 +1,13 @@
 import React from 'react'
 
-function SubmitForm ({handleSubmit, onInputChange, state}) {
+function SubmitForm ({users, handleSubmit, onInputChange, state}) {
     return (
         <form className="form" onSubmit={handleSubmit}>
           <h2>Name me you must</h2>
           <label htmlFor="submitter">I am </label>
           <select name="submitter" id="submitter" onChange={onInputChange}>
             <option value="">---</option>
-            <option value="Shaz">Shaz</option>
-            <option value="Kim">Kim</option>
+            {users.map(person => <option key={person.name} value={person.name}>{person.name}</option>)}
           </select>
       
           <label htmlFor="name">A good name would be: </label>

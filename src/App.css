@@ -809,6 +809,7 @@ body {
   visibility: visible;
 }
 .rainbow {
+  visibility: hidden;
   border-radius: 100%;
   -webkit-clip-path: inset(0 0 50% 0);
   clip-path: inset(0 0 50% 0);

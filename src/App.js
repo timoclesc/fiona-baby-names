@@ -7,7 +7,17 @@ import './App.css';
 import axios from 'axios';
 import { useState, useRef } from 'react';
 
-const url = 'https://sheet.best/api/sheets/51263273-3c8a-4c73-aa81-c8fba8fbb846';
+const url = 'https://sheet.best/api/sheets/5f77357c-a87f-4c63-8e99-f1d9202baf91';
+const users = [
+  {
+    name: 'Fiona',
+    password: '5569F8'
+  },
+  {
+    name: 'Danica',
+    password: '933090'
+  }
+];
 
 function App() {
   const [state, setState] = useState(
@@ -34,8 +44,6 @@ function App() {
 
   const password = useRef();
 
-  const kimPassword = "1F884A";
-  const shazPassword = "D10DC0";
 
   const handleSubmit = function (e) {
     setState({
@@ -62,11 +70,15 @@ function App() {
   const handleLogin = (e) => {
     var user = '';
 
-    if (password.current?.value === kimPassword) {
-      user = 'Kim';
-    } else if (password.current?.value === shazPassword) {
-      user = 'Shaz';
-    } else {
+    users.forEach(
+      person => { 
+        if (password.current?.value === person.password) {
+          user = person.name;
+        } 
+      }
+    );
+
+    if (!user) {
       setState({
         ...state,
         hasError: true,
@@ -89,7 +101,8 @@ function App() {
           hasError: response.status !== 200,
           data: response.data,
          currentId: response.data.find(item => item.submitter !== user)?.id,
-         user: user
+         user: user,
+         hasConfirm: false
         });
     }, response => {
       console.error(response);
@@ -138,7 +151,7 @@ function App() {
   const changeId = (change) => {
     var newIndex = rateNames.map(entry => entry.id).indexOf(state.currentId.toString()) + change;
 
-    newIndex > -1 && setState(
+    newIndex > -1 && newIndex < rateNames.length && setState(
       currentState => ({
         ...currentState, 
         currentId: rateNames[newIndex].id
@@ -200,7 +213,7 @@ function App() {
         <div className="rainbow"></div>
       </div>
 
-      {state.data.length === 0 && <SubmitForm handleSubmit={handleSubmit} onInputChange={onInputChange} state={state} />}
+      {state.data.length === 0 && <SubmitForm users={users} handleSubmit={handleSubmit} onInputChange={onInputChange} state={state} />}
 
       <div className="notification">
         {state.hasError ? <p>Uh-oh, something went wrong...</p> : ''}
